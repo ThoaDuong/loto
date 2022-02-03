@@ -69,7 +69,9 @@
                         <thead>
                           <tr>
                             <th scope="col" v-for="user in listUsers" class="text-center"> 
-                                <label v-bind:class="{'text-danger':user.isPause, 'text-info':!user.isPause}">{{user.userName}} {{user.isPause ? "đang ẻ nha đừng hối" : ""}}</label> <br>
+                                <label v-bind:class="{'text-danger':user.isPause, 'text-info':!user.isPause}">
+                                    {{user.userName}} {{user.isPause ? "đang ẻ nha đừng hối" : ""}}
+                                </label> <br>
                                 <button type="button" v-on:click="user.isWin = true" class="btn btn-outline-warning">Kinh</button> <br>
                                 <button type="button" v-on:click="user.isPause = true" class="btn btn-outline-danger">Nghỉ đi ẻ cái</button>
                                 <button type="button" v-on:click="user.isPause = false" class="btn btn-outline-success">Ta trở lại rồi đây</button>
@@ -84,7 +86,7 @@
                           </tr>
                         </tbody>
                       </table>
-                      <button type="button" v-on:click="onCalculator" class="btn btn-info">Chốt đơn 1 ván</button>
+                      <button type="button" v-on:click="onCalculate" class="btn btn-info">Chốt đơn 1 ván</button>
                 </div>
             </div>
         </div>
@@ -169,7 +171,7 @@
                     this.searchNumber = null;
                     this.resultSearch = '';
                 },
-                onCalculator: function (){
+                onCalculate: function (){
                     var numberUserWin = 0;
                     var numberUserPause = 0;
                     this.listUsers.forEach(user => {
@@ -182,7 +184,7 @@
                     })
                     this.listUsers.forEach(user => {
                         if(user.isWin){
-                            user.money += Math.floor(this.listUsers.length - 1 - numberUserPause) * this.price / numberUserWin;
+                            user.money += Math.floor(this.listUsers.length - numberUserWin - numberUserPause) * this.price / numberUserWin;
                             user.isWin = false;
                         }else{
                             if(!user.isPause){
